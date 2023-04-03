@@ -2,8 +2,8 @@ package buss_system;
 import  java.util.Scanner;
 public class Buss_System {
     public static Scanner keyboard = new Scanner(System.in);
-    public static byte vuxenplats = 2;
-    public static byte barnplats = 3;
+    public static byte vuxenplats = 0;
+    public static byte barnplats = 0;
     public static byte pensionärplats = 0;
     public static int[] sittplatser= new int[22];
     public static byte s = 1;
@@ -21,57 +21,69 @@ public class Buss_System {
             System.out.println(fält[i]);
         }
         byte menyval = keyboard.nextByte();
-        while(menyval != 4){
-        boolean menyboolean = true;
-        while(menyboolean == true){
+        var fortsätt = true;
+        while(fortsätt){
             switch(menyval){
                 case 1->{
-                    menyboolean = false;
                     läggtillpassagerare();
+                    fortsätt = false;
                 }
                 case 2->{
-                    menyboolean = false;
                     ledigaplatser();
+                    fortsätt = false;
                     }
                 case 3->{
-                    menyboolean = false;
                     räknavinst();
                     double vinst = räknavinst();
                     System.out.println("Din vinst är" + vinst + "kr");
                     }
                 case 4->{
-                    menyboolean = false;
                     avbokaplats();
+                    System.out.println("Din plats är avbokad!");
                     }
                 case 5->{
-                    System.out.println("Hejdå!");
                     break;
                     }
                 default->{ 
                     System.out.println("Välj ett tal mellan 1-5");
                     }
-    }}}
     }
+            keyboard.nextLine();
+            System.out.println("Vill du göra något mer? ja/nej");
+                String val = keyboard.nextLine();
+                if(val.equalsIgnoreCase("ja")){
+                    fortsätt = true;
+                    
+                if(val.equalsIgnoreCase("nej")){
+                    System.out.println("Okej, Hejdå!");
+                   fortsätt = false;
+                }    
+        }
+    
+    }}
         
         static void läggtillpassagerare(){
             System.out.println("Skriv in ditt personnummer i formatet, yyyymmdd");
             int personnummer = keyboard.nextInt();
             if(personnummer > 20050101){
                 sittplatser[s] = personnummer;
+                System.out.println("Du har plats " + s);
                 s++;
                 barnplats = (byte)(barnplats +1);
             }
-            if(personnummer > 19541231){
+            else if(personnummer > 19541231){
                 sittplatser[s] = personnummer;
+                System.out.println("Du har plats " + s);
                 s++;
                 vuxenplats = (byte)(vuxenplats +1);
             }
             else{
                 sittplatser[s] = personnummer;
+                System.out.println("Du har plats " + s);
                 s++;
                 pensionärplats =(byte)(pensionärplats +1);
             }
-
+            
         }
     
         static void ledigaplatser(){
@@ -84,7 +96,7 @@ public class Buss_System {
         }
         
         static void avbokaplats(){
-            System.out.println("nej");
+            System.out.println("vad är ditt personnummer?: ");
         }
         
 }
