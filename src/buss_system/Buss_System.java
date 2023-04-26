@@ -7,6 +7,7 @@ public class Buss_System {
     public static byte pensionärplats = 0;
     public static int[] sittplatser= new int[22];
     public static byte s = 1;
+    
     public static void main(String[] args) {
         System.out.println("Vad vill du göra?:");
  
@@ -21,6 +22,56 @@ public class Buss_System {
             System.out.println(fält[i]);
         }
         byte menyval = keyboard.nextByte();
+        meny(menyval);
+        
+        if(s>=22){
+            System.out.println("Sista platsen är tagen!");
+        }
+     
+    }
+        
+        static void läggtillpassagerare(){
+            System.out.println("Skriv in ditt personnummer i formatet, yyyymmdd");
+            int personnummer = keyboard.nextInt();
+            if(personnummer > 20050101){
+                sittplatser[s] = personnummer;
+                System.out.println("Du har plats " + s);
+                s++;
+                barnplats = (byte)(barnplats +1);
+            }
+            else if(personnummer > 19541231){
+                sittplatser[s] = personnummer;
+                System.out.println("Du har plats " + s);
+                s++;
+                vuxenplats = (byte)(vuxenplats +1);
+            }
+            else{
+                sittplatser[s] = personnummer;
+                System.out.println("Du har plats " + s);
+                s++;
+                pensionärplats =(byte)(pensionärplats +1);
+            }
+            
+        }
+    
+        static void ledigaplatser(){
+            System.out.println("hej");
+        }
+        
+        static double räknavinst(){
+            double vinst = (barnplats*149.99) + (vuxenplats*299.99) + (pensionärplats*199.99);
+            return vinst;
+        }
+        
+        static void avbokaplats(){
+            System.out.println("vad är ditt personnummer?: ");
+            int personnummer = keyboard.nextInt();
+            
+           
+            }
+        
+        
+        static void meny(byte menyval){
         var fortsätt = true;
         while(fortsätt){
             switch(menyval){
@@ -59,44 +110,8 @@ public class Buss_System {
                    fortsätt = false;
                 }    
         }
-    
-    }}
-        
-        static void läggtillpassagerare(){
-            System.out.println("Skriv in ditt personnummer i formatet, yyyymmdd");
-            int personnummer = keyboard.nextInt();
-            if(personnummer > 20050101){
-                sittplatser[s] = personnummer;
-                System.out.println("Du har plats " + s);
-                s++;
-                barnplats = (byte)(barnplats +1);
-            }
-            else if(personnummer > 19541231){
-                sittplatser[s] = personnummer;
-                System.out.println("Du har plats " + s);
-                s++;
-                vuxenplats = (byte)(vuxenplats +1);
-            }
-            else{
-                sittplatser[s] = personnummer;
-                System.out.println("Du har plats " + s);
-                s++;
-                pensionärplats =(byte)(pensionärplats +1);
-            }
-            
+    }
         }
-    
-        static void ledigaplatser(){
-            System.out.println("hej");
-        }
-        
-        static double räknavinst(){
-            double vinst = (barnplats*149.99) + (vuxenplats*299.99) + (pensionärplats*199.99);
-            return vinst;
-        }
-        
-        static void avbokaplats(){
-            System.out.println("vad är ditt personnummer?: ");
-        }
+                
         
 }
