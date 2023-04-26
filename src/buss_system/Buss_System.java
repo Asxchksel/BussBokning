@@ -10,22 +10,11 @@ public class Buss_System {
     
     public static void main(String[] args) {
         System.out.println("Vad vill du göra?:");
- 
-        String[] fält = new String[6];
-            fält[1] = "1. Lägg till passagerare";
-            fält[2] = "2. Kolla lediga platser";
-            fält[3] = "3. Beräkna vinst";
-            fält[4] = "4. Avboka Plats";
-            fält[5] = "5. Avsluta programmet";
-            
-        for (int i = 1; i < 6; i++) {
-            System.out.println(fält[i]);
-        }
-        byte menyval = keyboard.nextByte();
-        meny(menyval);
+        meny();
         
         if(s>=22){
             System.out.println("Sista platsen är tagen!");
+            räknavinst();
         }
      
     }
@@ -55,7 +44,14 @@ public class Buss_System {
         }
     
         static void ledigaplatser(){
-            System.out.println("hej");
+            for (int i = 1; i < sittplatser.length; i++) {
+                if(sittplatser[i] == 0){
+                    System.out.println(i + ": inte upptagen");
+                }
+                else if(sittplatser[i] != 0){
+                    System.out.println(i + ": upptagen");
+            }
+            }
         }
         
         static double räknavinst(){
@@ -67,21 +63,38 @@ public class Buss_System {
             System.out.println("vad är ditt personnummer?: ");
             int personnummer = keyboard.nextInt();
             
+            for (int i = 0; i < sittplatser.length; i++) {
+                if(sittplatser[i] == personnummer){
+                    System.out.println("Plats " + i + " avbokad");
+                    sittplatser[i] = 0;
+                }
+            }
            
             }
         
         
-        static void meny(byte menyval){
+        static void meny(){
         var fortsätt = true;
+        
         while(fortsätt){
+            String[] fält = new String[6];
+            fält[1] = "1. Lägg till passagerare";
+            fält[2] = "2. Kolla lediga platser";
+            fält[3] = "3. Beräkna vinst";
+            fält[4] = "4. Avboka Plats";
+            fält[5] = "5. Avsluta programmet";
+            
+        for (int i = 1; i < 6; i++) {
+            System.out.println(fält[i]);
+        }
+        
+            byte menyval = keyboard.nextByte();
             switch(menyval){
                 case 1->{
                     läggtillpassagerare();
-                    fortsätt = false;
                 }
                 case 2->{
                     ledigaplatser();
-                    fortsätt = false;
                     }
                 case 3->{
                     räknavinst();
@@ -93,25 +106,13 @@ public class Buss_System {
                     System.out.println("Din plats är avbokad!");
                     }
                 case 5->{
+                    fortsätt = false;
                     break;
                     }
                 default->{ 
                     System.out.println("Välj ett tal mellan 1-5");
                     }
-    }
-            keyboard.nextLine();
-            System.out.println("Vill du göra något mer? ja/nej");
-                String val = keyboard.nextLine();
-                if(val.equalsIgnoreCase("ja")){
-                    fortsätt = true;
-                    
-                if(val.equalsIgnoreCase("nej")){
-                    System.out.println("Okej, Hejdå!");
-                   fortsätt = false;
-                }    
+    }    
         }
     }
         }
-                
-        
-}
