@@ -24,7 +24,7 @@ public class Buss_System {
         }
         System.out.println("Skriv in ditt personnummer i formatet, yyyymmdd");
         int personnummer = keyboard.nextInt();
-        if (personnummer > 20050101) {
+        if (personnummer > 20050101){
             sittplatser[sittplats] = personnummer;
             System.out.println("Du har plats " + sittplats);
             sittplats++;
