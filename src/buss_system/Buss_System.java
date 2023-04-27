@@ -82,7 +82,7 @@ public class Buss_System {
     }
 
     static void under18() {
-        
+         
     }
 
     static void meny() {
