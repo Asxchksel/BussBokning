@@ -82,9 +82,7 @@ public class Buss_System {
     }
 
     static void under18() {
-        for (int i = 1; i < barnplatsfält.length; i++) {
-            System.out.println(barnplatsfält[i]);
-        }
+        
     }
 
     static void meny() {
