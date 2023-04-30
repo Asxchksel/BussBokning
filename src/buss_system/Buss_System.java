@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Buss_System {
 
+    //public värden så att alla metoder kan komma åt infon
     public static Scanner keyboard = new Scanner(System.in);
     public static byte vuxenplats = 0;
     public static byte barnplats = 0;
@@ -12,7 +13,7 @@ public class Buss_System {
     public static byte sittplats = 1;
 
     public static void main(String[] args) {
-        System.out.println("Vad vill du göra?:");
+        System.out.println("Vad vill du göra?:");// simpel main för att ha allting i seprata metoder
         meny();
 
     }
@@ -21,7 +22,7 @@ public class Buss_System {
         if (sittplats >= 22) {
             System.out.println("Alla platser tagna!");
             meny();
-        }
+        }//om antalet sittplatser som har getts ut är 21 så kan man inte få nya 
         System.out.println("Skriv in ditt personnummer i formatet, yyyymmdd");
         int personnummer = keyboard.nextInt();
         if (personnummer > 20050101){
@@ -45,20 +46,29 @@ public class Buss_System {
 
     static void ledigaplatser() {
         for (int i = 1; i < sittplatser.length; i++) {
-            if (sittplatser[i] == 0) {
-                System.out.println(i + ": inte upptagen");
-            } else if (sittplatser[i] != 0) {
-                System.out.println(i + ": upptagen");
+            if (i % 4 == 0 || (i-1) % 4 == 0){
+                if (sittplatser[i] == 0) { //skriver ut om vilka platser som är tagna eller inte tagna baserat på om värdet av fältnummret är 0 eller inte, även om det är fönster plats eller inte
+                    System.out.println(i + ": inte upptagen, fönsterplats");
+                } 
+                else if (sittplatser[i] != 0) {
+                    System.out.println(i + ": upptagen, fönsterplats");
+                }
             }
-        }
-    }
+            else{
+                    if (sittplatser[i] == 0) { 
+                    System.out.println(i + ": inte upptagen, fönsterplats");
+            } else if (sittplatser[i] != 0) {
+                    System.out.println(i + ": upptagen, fönsterplats");
+            }
+            }
+    }}
 
-    static double räknavinst() {
+    static double räknavinst() { //då varje gång en plats läggs till så ger den en plats typ också så måste det endast gångra antalet plats typer med värdet
         double vinst = (barnplats * 149.99) + (vuxenplats * 299.99) + (pensionärplats * 199.99);
         return vinst;
     }
 
-    static void avbokaplats() {
+    static void avbokaplats() { // här hittar man platsen som perosnen har genom att jämföra personnummer med fältets värden och sen tar bort det personnummret om det är rätt
         System.out.println("vad är ditt personnummer?: ");
         int personnummer = keyboard.nextInt();
 
@@ -71,7 +81,7 @@ public class Buss_System {
 
     }
 
-    static void hittaplats() {
+    static void hittaplats() { // ganska samma till avboka bara att man endast säger vilken plats personen har
         System.out.println("vad är ditt personnummer?: ");
         int personnummer = keyboard.nextInt();
         for (int i = 0; i < sittplatser.length; i++) {
@@ -88,7 +98,7 @@ public class Buss_System {
     static void meny() {
         var fortsätt = true;
 
-        while (fortsätt) {
+        while (fortsätt) { // while loop så man kan köra menyn för alltid, där alla metoder kan köras
             String[] fält = new String[8];
             fält[1] = "1. Lägg till passagerare";
             fält[2] = "2. Kolla lediga platser";
@@ -130,7 +140,7 @@ public class Buss_System {
                     break;
                 }
                 default -> {
-                    System.out.println("Välj ett tal mellan 1-5");
+                    System.out.println("Välj ett tal mellan 1-7");
                 }
             }
         }
