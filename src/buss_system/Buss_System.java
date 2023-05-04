@@ -18,28 +18,47 @@ public class Buss_System {
 
     }
 
-    static void läggtillpassagerare() {
+    static void läggtillpassagerare(int personnummer) {
         if (sittplats >= 22) {
             System.out.println("Alla platser tagna!");
             meny();
         }//om antalet sittplatser som har getts ut är 21 så kan man inte få nya 
-        System.out.println("Skriv in ditt personnummer i formatet, yyyymmdd");
-        int personnummer = keyboard.nextInt();
         if (personnummer > 20050101){
             sittplatser[sittplats] = personnummer;
-            System.out.println("Du har plats " + sittplats);
-            sittplats++;
-            barnplats = (byte) (barnplats + 1);
+            if (sittplats % 4 == 0 || (sittplats-1) % 4 == 0){
+                System.out.println("Du har fönster plats " + sittplats);
+                sittplats++;
+                barnplats = (byte) (barnplats + 1);   
+            }
+            else{
+                System.out.println("Du har plats " + sittplats);
+                sittplats++;
+                barnplats = (byte) (barnplats + 1);
+            }
         } else if (personnummer > 19541231) {
             sittplatser[sittplats] = personnummer;
-            System.out.println("Du har plats " + sittplats);
-            sittplats++;
-            vuxenplats = (byte) (vuxenplats + 1);
+            if (sittplats % 4 == 0 || (sittplats-1) % 4 == 0){
+                System.out.println("Du har fönster plats " + sittplats);
+                sittplats++;
+                vuxenplats = (byte) (vuxenplats + 1);   
+            }
+            else{
+                System.out.println("Du har plats " + sittplats);
+                sittplats++;
+                vuxenplats = (byte) (vuxenplats + 1);
+            }
         } else {
             sittplatser[sittplats] = personnummer;
-            System.out.println("Du har plats " + sittplats);
-            sittplats++;
-            pensionärplats = (byte) (pensionärplats + 1);
+            if (sittplats % 4 == 0 || (sittplats-1) % 4 == 0){
+                System.out.println("Du har fönster plats " + sittplats);
+                sittplats++;
+                pensionärplats = (byte) (pensionärplats + 1);  
+            }
+            else{
+                System.out.println("Du har plats " + sittplats);
+                sittplats++;
+                pensionärplats = (byte) (pensionärplats + 1);
+            }
         }
 
     }
@@ -55,23 +74,22 @@ public class Buss_System {
                 }
             }
             else{
-                    if (sittplatser[i] == 0) { 
+                if (sittplatser[i] == 0) { 
                     System.out.println(i + ": inte upptagen, fönsterplats");
-            } else if (sittplatser[i] != 0) {
+            } 
+                else if (sittplatser[i] != 0) {
                     System.out.println(i + ": upptagen, fönsterplats");
             }
             }
-    }}
+    }
+    }
 
     static double räknavinst() { //då varje gång en plats läggs till så ger den en plats typ också så måste det endast gångra antalet plats typer med värdet
         double vinst = (barnplats * 149.99) + (vuxenplats * 299.99) + (pensionärplats * 199.99);
         return vinst;
     }
 
-    static void avbokaplats() { // här hittar man platsen som perosnen har genom att jämföra personnummer med fältets värden och sen tar bort det personnummret om det är rätt
-        System.out.println("vad är ditt personnummer?: ");
-        int personnummer = keyboard.nextInt();
-
+    static void avbokaplats(int personnummer) { // här hittar man platsen som perosnen har genom att jämföra personnummer med fältets värden och sen tar bort det personnummret om det är rätt
         for (int i = 0; i < sittplatser.length; i++) {
             if (sittplatser[i] == personnummer) {
                 System.out.println("Plats " + i + " avbokad");
@@ -81,9 +99,7 @@ public class Buss_System {
 
     }
 
-    static void hittaplats() { // ganska samma till avboka bara att man endast säger vilken plats personen har
-        System.out.println("vad är ditt personnummer?: ");
-        int personnummer = keyboard.nextInt();
+    static void hittaplats(int personnummer) { // ganska samma till avboka bara att man endast säger vilken plats personen har
         for (int i = 0; i < sittplatser.length; i++) {
             if (sittplatser[i] == personnummer) {
                 System.out.println("Din plats är plats " + i);
@@ -115,7 +131,9 @@ public class Buss_System {
             byte menyval = keyboard.nextByte();
             switch (menyval) {
                 case 1 -> {
-                    läggtillpassagerare();
+                    System.out.println("vad är ditt personnummer?: ");
+                    int personnummer = keyboard.nextInt();
+                    läggtillpassagerare(personnummer);
                 }
                 case 2 -> {
                     ledigaplatser();
@@ -126,11 +144,15 @@ public class Buss_System {
                     System.out.println("Din vinst är" + vinst + "kr");
                 }
                 case 4 -> {
-                    avbokaplats();
+                    System.out.println("vad är ditt personnummer?: ");
+                    int personnummer = keyboard.nextInt();
+                    avbokaplats(personnummer);
                     System.out.println("Din plats är avbokad!");
                 }
                 case 5 -> {
-                    hittaplats();
+                    System.out.println("vad är ditt personnummer?: ");
+                    int personnummer = keyboard.nextInt();
+                    hittaplats(personnummer);
                 }
                 case 6 -> {
                     under18();
